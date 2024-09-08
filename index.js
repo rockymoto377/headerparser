@@ -24,9 +24,13 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+// Header parsing functionality
 app.get('/api/whoami', function(req,res) {
+	let dirytIP = req.ip;
+	let indexedIP = req.ip.split(":").length;
+	let cleanIP = req.ip.split(":")[indexedIP-1];
 	res.json({
-		ipaddress: req.ip,
+		ipaddress: cleanIP,
 		language: req.get("Accept-Language"),
 		software: req.get("User-Agent")
 	});
